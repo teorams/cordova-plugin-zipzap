@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -41,10 +42,10 @@ public class ZipZap extends CordovaPlugin {
             }
 
             zipFile.extractAll(toPath);
-
+        } catch (ZipException e) {
+            callbackContext.error(e.getMessage());
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
-            return;
         }
     }
 
