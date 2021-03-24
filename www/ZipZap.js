@@ -32,12 +32,7 @@ function validateConfig(config, mode, callback) {
 
 
 exports.unzip = function (config, successCallback, errorCallback) {
-    validateConfig(config, 'unzip', function (error) {
-        if (error) {
-            return errorCallback(error);
-        }
-        exec(successCallback, errorCallback, 'ZipZap', 'unzip', [config.from, config.to, config.password]);
-    });
+    exec(successCallback, errorCallback, 'ZipZap', 'unzip', [config.from, config.to, config.password]);
 };
 
 
