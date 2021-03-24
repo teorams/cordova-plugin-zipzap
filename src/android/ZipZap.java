@@ -18,7 +18,7 @@ public class ZipZap extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         try {
             if (action.equals("unzip")) {
-                unzip(args.getString(0), args.getString(1), args.getString(2));
+                unzip(callbackContext, args.getString(0), args.getString(1), args.getString(2));
             }
 
             callbackContext.success(1);
@@ -29,7 +29,7 @@ public class ZipZap extends CordovaPlugin {
         }
     }
 
-    private void unzip(String from, String to, String password) throws Exception {
+    private void unzip(CallbackContext callbackContext, String from, String to, String password) throws Exception {
         try {
 
             String fromPath = removePathProtocolPrefix(from);
@@ -43,7 +43,8 @@ public class ZipZap extends CordovaPlugin {
             zipFile.extractAll(toPath);
 
         } catch (Exception e) {
-            e.getMessage();
+            callbackContext.error(e.getMessage());
+            return;
         }
     }
 
