@@ -37,7 +37,7 @@ public class ZipZap extends CordovaPlugin {
 
             ZipFile zipFile = new ZipFile(fromPath);
             if (!password.isEmpty() && zipFile.isEncrypted()) {
-                zipFile.setPassword(password);
+                zipFile.setPassword(password.toCharArray());
             }
 
             zipFile.extractAll(toPath);
